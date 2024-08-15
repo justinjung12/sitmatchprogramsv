@@ -18,6 +18,6 @@ def save():
     print(diclcoation,dicfriend)
     return {'ok':'ok'}
 
-@app.route('/wjadmin', methods=['POST'])
+@app.route('/wjadmin', methods=['GET'])
 def admin():
     return{'location':diclcoation,'friend':dicfriend}
