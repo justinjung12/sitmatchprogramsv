@@ -1,32 +1,165 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloudtype - Flask</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css" rel="stylesheet" type="text/css" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
-  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 기본 리셋 스타일 */
+        body,
+        h1,
+        p,
+        form,
+        label,
+        input,
+        button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .my-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group p {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .form-group label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            left: 70%;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
+
 <body>
-<div class="hero min-h-screen bg-base-200">
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <img src="{{ url_for('static', filename='img/flask.webp') }}" class="w-36 rounded-lg md:ml-5 lg:ml-5"  alt="flask"/>
-    <div>
-      <h1 class="text-5xl font-bold">Flask</h1>
-      <p class="py-6">클라우드타입에서 배포한 Flask 어플리케이션입니다.</p>
-      <button type="button" onclick="window.open('https://github.com/cloudtype-examples/java-springboot')" class="btn btn-outline rounded">
-        GitHub
-      </button>
-      <button type="button" onclick="window.open('https://docs.cloudtype.io/')" class="btn btn-outline rounded">
-        Docs
-      </button>
-      <button type="button" onclick="window.open('https://discord.gg/U7HX4BA6hu')" class="btn btn-outline rounded">
-        Discord
-      </button>
-    </div>
-  </div>
-</div>
+    <form class="my-form">
+        <div class="form-group">
+            <label for="input1">이름을 입력해주세요</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="input2">원하는 친구 이름을 입력하세요</label>
+            <input type="text" id="friend1" name="friend1" required>
+        </div>
+        <div class="form-group">
+            <label for="input3">원하는 친구 이름을 입력하세요</label>
+            <input type="text" id="friend2" name="friend2" required>
+        </div>
+        <div class="form-group">
+            <label for="input4">원하는 친구 이름을 입력하세요</label>
+            <input type="text" id="friend3" name="friend3" required>
+        </div>
+        <div class="form-group">
+            <div>원하는 자리</div>
+            <label>
+                <input type="radio" name="option" value="front"> 앞쪽
+            </label>
+            <label>
+                <input type="radio" name="option" value="back"> 뒤쪽
+            </label>
+            <label>
+                <input type="radio" name="option" value="window"> 창문쪽
+            </label>
+            <label>
+                <input type="radio" name="option" value="passage"> 복도 창문쪽
+            </label>
+            <label>
+                <input type="radio" name="option" value="middle"> 가운데
+            </label>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script>
+        const form = document.querySelector('.my-form');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // 기본 제출 동작 방지
+            let result = {}
+            const friends = [document.querySelector('#friend1').value, document.querySelector('#friend2').value, document.querySelector('#friend3').value]
+            const selectedRadio = document.querySelector('input[name="option"]:checked');
+
+            result['name'] = document.querySelector('#name').value
+            result['friends'] = friends
+
+
+            if (selectedRadio) {
+                result['location'] = selectedRadio.value
+            } else {
+                alert('선택 안된 항목이 있습니다.확인해 주세요');
+            }
+            console.log(result)
+
+            $.ajax({
+                type: "post",
+                url: "http://127.0.0.1:8080/save",
+                data: JSON.stringify(result),  // js오브젝트를 json으로 파싱
+                headers: {
+                    "content-type": "application/json; charset=utf-8"
+                },
+                dataType: "json"
+            }).done((res) => {
+                alert('완료')
+            }).fail((err) => {
+                console.log(err);
+            });
+        });
+    </script>
 </body>
+
 </html>
