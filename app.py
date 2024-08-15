@@ -1,7 +1,23 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route("/")
+dicfriend = {}
+diclcoation = {'front':[],'back':[],'window':[],'passage':[],'middle':[]}
+@app.route('/', methods=['GET'])
 def index():
-    return render_template('./index.html')
+    return render_template('index.html')
+
+@app.route('/save', methods=['POST'])
+def save():
+    result = request.get_json()
+    dicfriend[result['name']] = result['friends']
+    diclcoation[result['location']].append(result['name'])
+    print(diclcoation,dicfriend)
+    return {'ok':'ok'}
+
+@app.route('/wjadmin', methods=['POST'])
+def admin():
+    return{'location':diclcoation,'friend':dicfriend}
