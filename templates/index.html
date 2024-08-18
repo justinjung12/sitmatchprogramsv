@@ -104,23 +104,14 @@
             <input type="text" id="friend3" name="friend3" required>
         </div>
         <div class="form-group">
-            <div>원하는 자리</div>
-            <label>
-                <input type="radio" name="option" value="front"> 앞쪽
-            </label>
-            <label>
-                <input type="radio" name="option" value="back"> 뒤쪽
-            </label>
-            <label>
-                <input type="radio" name="option" value="window"> 창문쪽
-            </label>
-            <label>
-                <input type="radio" name="option" value="passage"> 복도 창문쪽
-            </label>
-            <label>
-                <input type="radio" name="option" value="middle"> 가운데
-            </label>
+            <label for="input5">싫어하지 않는 이성 친구 중 한 명의 이름을 입력하세요</label>
+            <input type="text" id="friend4" name="friend4" required>
         </div>
+        <div class="form-group">
+            <label for="input6">싫어하지 않는 이성 친구 중 한 명의 이름을 입력하세요</label>
+            <input type="text" id="friend5" name="friend5" required>
+        </div>
+
         <button type="submit">Submit</button>
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -131,23 +122,17 @@
         form.addEventListener('submit', function (event) {
             event.preventDefault(); // 기본 제출 동작 방지
             let result = {}
-            const friends = [document.querySelector('#friend1').value, document.querySelector('#friend2').value, document.querySelector('#friend3').value]
-            const selectedRadio = document.querySelector('input[name="option"]:checked');
+            const friends = [document.querySelector('#friend1').value, document.querySelector('#friend2').value, document.querySelector('#friend3').value,document.querySelector('#friend4').value,document.querySelector('#friend5').value,document.querySelector('#friend6').value]
 
             result['name'] = document.querySelector('#name').value
             result['friends'] = friends
 
 
-            if (selectedRadio) {
-                result['location'] = selectedRadio.value
-            } else {
-                alert('선택 안된 항목이 있습니다.확인해 주세요');
-            }
             console.log(result)
 
             $.ajax({
                 type: "post",
-                url: "https://port-0-sitmatchprogramsv-17xco2lltmrmrpc.sel5.cloudtype.app/save",
+                url: "http://127.0.0.1:8080/save",
                 data: JSON.stringify(result),  // js오브젝트를 json으로 파싱
                 headers: {
                     "content-type": "application/json; charset=utf-8"
