@@ -5,7 +5,6 @@ app = Flask(__name__)
 CORS(app)
 
 dicfriend = {}
-diclcoation = {'front':[],'back':[],'window':[],'passage':[],'middle':[]}
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
@@ -14,10 +13,10 @@ def index():
 def save():
     result = request.get_json()
     dicfriend[result['name']] = result['friends']
-    diclcoation[result['location']].append(result['name'])
-    print(diclcoation,dicfriend)
+
+    print(dicfriend)
     return {'ok':'ok'}
 
-@app.route('/wjadmin', methods=['GET'])
+@app.route('/wjadmin', methods=['POST'])
 def admin():
-    return{'location':diclcoation,'friend':dicfriend}
+    return{'friend':dicfriend}
