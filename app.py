@@ -12,11 +12,11 @@ def index():
 @app.route('/save', methods=['POST'])
 def save():
     result = request.get_json()
-    dicfriend[result['name']] = result['friends']
+    dicfriend[result['name']] = result['results']
 
     print(dicfriend)
     return {'ok':'ok'}
 
-@app.route('/wjadmin', methods=['POST'])
+@app.route('/wjadmin', methods=['GET'])
 def admin():
     return{'friend':dicfriend}
