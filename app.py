@@ -11,6 +11,7 @@ def index():
 
 @app.route('/save', methods=['POST'])
 def save():
+    global dicfriend
     result = request.get_json()
     dicfriend[result['name']] = result['results']
 
