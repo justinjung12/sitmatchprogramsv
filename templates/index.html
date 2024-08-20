@@ -4,136 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Radio Button Check</title>
     <style>
-        /* 기본 리셋 스타일 */
-        body,
-        h1,
-        p,
-        form,
-        label,
-        input,
-        button {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        #radioForm{
+            margin-left: 25%;
+            margin-top: 100px;
         }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        label{
+            margin-left: 20px;
         }
-
-        .my-form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .form-group p {
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .form-group input[type="radio"] {
-            margin-right: 5px;
-        }
-
-        .form-group label {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        button {
-            background-color: #28a745;
-            color: white;
+        button{
+            position: absolute;
+            left: 50%;
+            top: 90%;
+            transform: translate(-50%,-50%);
+            width: 150px;
+            height: 40px;
+            background-color: rgb(91, 173, 14);
+            padding: 5px;
             border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            position: relative;
-            left: 70%;
-        }
-
-        button:hover {
-            background-color: #218838;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <form class="my-form">
-        <div class="form-group">
-            <label for="input1">이름을 입력해주세요</label>
-            <input type="text" id="name" name="name" required>
+    
+    <form id="radioForm">
+        <div id="set1">
+            <h3>앉고싶은 자리 위치</h3>
+            <label><input type="radio" name="set1" value="Option 1"> 앞</label><br>
+            <label><input type="radio" name="set1" value="Option 2"> 뒤</label><br>
+            <label><input type="radio" name="set1" value="Option 3"> 오른쪽</label><br>
+            <label><input type="radio" name="set1" value="Option 4"> 왼쪽</label><br>
+            <label><input type="radio" name="set1" value="Option 5"> 가운데</label>
         </div>
-        <div class="form-group">
-            <label for="input2">원하는 친구 이름을 입력하세요</label>
-            <input type="text" id="friend1" name="friend1" required>
+        <div id="set2">
+            <h3>가장 귀여운 이모티콘은?</h3>
+            <label><input type="radio" name="set2" value="Option 1"> ദ്ദി ( ᵔ ᗜ ᵔ )</label><br>
+            <label><input type="radio" name="set2" value="Option 2">(⸝⸝⸝> _ <⸝⸝⸝)</label><br>
+            <label><input type="radio" name="set2" value="Option 3"> \(´｡• ◡ •｡`)__♡</label><br>
+            <label><input type="radio" name="set2" value="Option 4"> ( ͈ര ̫ര ͈)</label><br>
+            <label><input type="radio" name="set2" value="Option 5"> (՞⸝⸝o ⌑ o⸝⸝՞)</label>
         </div>
-        <div class="form-group">
-            <label for="input3">원하는 친구 이름을 입력하세요</label>
-            <input type="text" id="friend2" name="friend2" required>
+        <div id="set3">
+            <h3>가장 마음에드는 색은?</h3>
+            <label><input type="radio" name="set3" value="Option 1"> 파란색</label><br>
+            <label><input type="radio" name="set3" value="Option 2"> 노란색</label><br>
+            <label><input type="radio" name="set3" value="Option 3"> 흰색</label><br>
+            <label><input type="radio" name="set3" value="Option 4"> 검정색</label><br>
+            <label><input type="radio" name="set3" value="Option 5"> 빨간색</label>
         </div>
-        <div class="form-group">
-            <label for="input4">원하는 친구 이름을 입력하세요</label>
-            <input type="text" id="friend3" name="friend3" required>
-        </div>
-        <div class="form-group">
-            <label for="input5">싫어하지 않는 이성 친구 중 한 명의 이름을 입력하세요</label>
-            <input type="text" id="friend4" name="friend4" required>
-        </div>
-        <div class="form-group">
-            <label for="input6">싫어하지 않는 이성 친구 중 한 명의 이름을 입력하세요</label>
-            <input type="text" id="friend5" name="friend5" required>
-        </div>
-
-        <button type="submit">Submit</button>
+        <button type="button" onclick="checkSelections()">끝내기</button>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
-        const form = document.querySelector('.my-form');
+        function checkSelections() {
+            // 각 세트의 라디오 버튼을 그룹으로 가져옵니다.
+            const sets = ['set1', 'set2', 'set3'];
+            const results = {};
 
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // 기본 제출 동작 방지
-            let result = {}
-            const friends = [document.querySelector('#friend1').value, document.querySelector('#friend2').value, document.querySelector('#friend3').value,document.querySelector('#friend4').value,document.querySelector('#friend5').value,document.querySelector('#friend6').value]
+            sets.forEach(set => {
+                // 각 세트에 대한 선택된 라디오 버튼을 찾습니다.
+                const selected = document.querySelector(`input[name="${set}"]:checked`);
 
-            result['name'] = document.querySelector('#name').value
-            result['friends'] = friends
-
-
-            console.log(result)
+                if (selected) {
+                    // 선택된 값을 결과 객체에 저장합니다.
+                    results[set] = selected.value;
+                } else {
+                    // 선택된 값이 없으면 'None'을 저장합니다.
+                    results[set] = 'None';
+                }
+            });
 
             $.ajax({
                 type: "post",
                 url: "http://127.0.0.1:8080/save",
-                data: JSON.stringify(result),  // js오브젝트를 json으로 파싱
+                data: JSON.stringify(results),  // js오브젝트를 json으로 파싱
                 headers: {
                     "content-type": "application/json; charset=utf-8"
                 },
@@ -143,7 +93,10 @@
             }).fail((err) => {
                 console.log(err);
             });
-        });
+
+
+        }
+
     </script>
 </body>
 
