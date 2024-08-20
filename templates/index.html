@@ -60,30 +60,30 @@
         </div>
         <button type="button" onclick="checkSelections()">끝내기</button>
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
         function checkSelections() {
             // 각 세트의 라디오 버튼을 그룹으로 가져옵니다.
             const sets = ['set1', 'set2', 'set3'];
-            const results = {};
-
+            let results = [];
+            let name = prompt('이름을 입력해주세요')
             sets.forEach(set => {
                 // 각 세트에 대한 선택된 라디오 버튼을 찾습니다.
                 const selected = document.querySelector(`input[name="${set}"]:checked`);
 
                 if (selected) {
                     // 선택된 값을 결과 객체에 저장합니다.
-                    results[set] = selected.value;
+                    results.push(selected.value);
                 } else {
-                    // 선택된 값이 없으면 'None'을 저장합니다.
-                    results[set] = 'None';
+                    alert('선택되지 않은 값이 있습니다')
                 }
             });
 
             $.ajax({
                 type: "post",
                 url: "http://127.0.0.1:8080/save",
-                data: JSON.stringify(results),  // js오브젝트를 json으로 파싱
+                data: JSON.stringify({'name':name,'results':results}),  // js오브젝트를 json으로 파싱
                 headers: {
                     "content-type": "application/json; charset=utf-8"
                 },
